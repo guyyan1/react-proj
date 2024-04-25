@@ -2,7 +2,7 @@ function Employee(props){
     return (
         <div class="py-8 px-8 max-w-sm m-2 bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
         <img
-            class="object-cover rounded-full h-[100px] w-[100px] block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0"
+            class="object-cover rounded-full h-[100px] w-[100px] block m-2 h-24 rounded-full sm:mx-0 sm:shrink-0"
             src={props.img} 
             alt="Employees's Face"
         />

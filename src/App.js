@@ -1,6 +1,8 @@
-import Employee from './components/Employee';
+
+import Tile from './components/tile';
 import './index.css';
 import { useState } from 'react';
+import { motion } from 'framer-motion'
 function App() {
   const showEmplyees = true;
   const [role, setRole] = useState('Developer')
@@ -12,12 +14,12 @@ function App() {
               setRole(e.target.value);
             }}
           />
-          <div className="flex flex-wrap">
-              <Employee name="Guy" role="CEO" img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"/>
-              <Employee name="Ron" role="Developer"/>
-              <Employee name="Yuval" role={role}/>
-              <Employee name="Rami"/>
-          </div>
+          <motion.div 
+              className="flex flex-wrap"
+              animate={{ x: 100 , y: 100 }} 
+              >
+                <Tile img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"></Tile>
+          </motion.div>
         </>)
         :
           (<p>can't show right now</p>)
