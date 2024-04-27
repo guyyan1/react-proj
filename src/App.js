@@ -4,40 +4,33 @@ import './index.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion'
 import useWindowDimensions from './hooks/useWindowDimentions';
-
+import Canvas from './components/Canvas';
 
 
 function App() {
-  const showEmplyees = true;
   const { height, width } = useWindowDimensions();
-  const tileSize = 50;
-  const [tiles, setTiles] = useState( 
-      Array(
-      Math.floor(height/tileSize))
-      .fill()
-      .map(() => Array(Math.floor(width/tileSize))
-      .fill(<Tile></Tile>))    
-  )
+  function draw(context, count){
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      context.fillStyle = 'grey';
+      const delta = count % Math.floor(width/2);
+      context.fillRect(0 + delta, 0, 100, height);
+  }
+
+  function draw2(context, count){
+    // context.clearRect((width - 100), 0, context.canvas.width, context.canvas.height);
+    // context.fillStyle = 'grey';
+    // const delta = count % Math.floor(width/2);
+    // context.fillRect((width - 100) - delta, 0, 100, height);
+    // context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+    // context.fillStyle = 'grey'
+    // const d = count % 100
+    // context.fillRect(10 +d , 10  , 10 , 10)
+  }
+
   return (
-    <div className="App">
-      {showEmplyees ? (
-        <>
-          <div>
-              array rows: {tiles.length} ~ array cols: {tiles[1].length}
-          </div>
-          <div>
-              width: {width} ~ height: {height}
-          </div>
-          <motion.div 
-              className="flex flex-wrap"
-              animate={{ x: 100 , y: 100 }} 
-              >
-                <Tile img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"></Tile>
-          </motion.div>
-        </>)
-        :
-          (<p>can't show right now</p>)
-      }
+    <div>
+      <Canvas draw={draw} width={Math.floor(width/2)} height={height} style={{border: "1px solid black"}}></Canvas>
+      <Canvas draw={draw2} width={Math.floor(width/2)} height={height} style={{border: "1px solid black"}}></Canvas>
     </div>
   );
 }
