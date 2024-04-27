@@ -3,17 +3,31 @@ import Tile from './components/tile';
 import './index.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion'
+import useWindowDimensions from './hooks/useWindowDimentions';
+
+
+
 function App() {
   const showEmplyees = true;
-  const [role, setRole] = useState('Developer')
+  const { height, width } = useWindowDimensions();
+  const tileSize = 50;
+  const [tiles, setTiles] = useState( 
+      Array(
+      Math.floor(height/tileSize))
+      .fill()
+      .map(() => Array(Math.floor(width/tileSize))
+      .fill(<Tile></Tile>))    
+  )
   return (
     <div className="App">
       {showEmplyees ? (
         <>
-          <input type='text' onChange={(e)=>{
-              setRole(e.target.value);
-            }}
-          />
+          <div>
+              array rows: {tiles.length} ~ array cols: {tiles[1].length}
+          </div>
+          <div>
+              width: {width} ~ height: {height}
+          </div>
           <motion.div 
               className="flex flex-wrap"
               animate={{ x: 100 , y: 100 }} 
